@@ -3,6 +3,7 @@
 namespace App\Repositories;
 
 use Illuminate\Container\Container as Application;
+use Illuminate\Support\Facades\DB;
 use Prettus\Repository\Eloquent\BaseRepository;
 use Prettus\Repository\Criteria\RequestCriteria;
 use App\Repositories\PostRepository;
@@ -23,9 +24,9 @@ class PostRepositoryEloquent extends BaseRepository implements PostRepository
      * @param string[] $columns
      * @return mixed
      */
-    public function getPostsPaginate($length = 10, $columns = ["*"])
+    public function getPostsPaginate($length = 10, $columns = ['*'])
     {
-        return $this->orderBy("id", "desc")->paginate($length);
+        return $this->select($columns)->orderBy("id", "desc")->paginate($length);
     }
 
     /**
