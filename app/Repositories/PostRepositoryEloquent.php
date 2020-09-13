@@ -2,6 +2,7 @@
 
 namespace App\Repositories;
 
+use Carbon\Carbon;
 use Illuminate\Container\Container as Application;
 use Illuminate\Support\Facades\DB;
 use Prettus\Repository\Eloquent\BaseRepository;
@@ -18,6 +19,23 @@ use App\Validators\PostValidator;
 class PostRepositoryEloquent extends BaseRepository implements PostRepository
 {
     /**
+     * Get popular posts in day
+     *
+     * @param int $limit
+     * @param string $direction
+     * @return mixed
+     */
+    public function getPopularPostsInDay($limit = 6, $direction = "DESC") {
+        return $this->orderBy("view_count", $direction)
+                    ->whereBetween("created_at", [
+                        Carbon::now()->format("Y-m-d")."00:00:00",
+                        Carbon::now()
+                    ])
+                    ->limit($limit)
+                    ->get();
+    }
+
+    /**
      * Get posts with paginate
      *
      * @param int $length
@@ -26,7 +44,7 @@ class PostRepositoryEloquent extends BaseRepository implements PostRepository
      */
     public function getPostsPaginate($length = 10, $columns = ['*'])
     {
-        return $this->select($columns)->orderBy("id", "desc")->paginate($length);
+        return $this->orderBy("id", "desc")->paginate($length);
     }
 
     /**

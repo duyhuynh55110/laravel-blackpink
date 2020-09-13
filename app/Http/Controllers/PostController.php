@@ -19,6 +19,13 @@ class PostController extends BaseController
     }
 
     /**
+     * Display a listing popular posts in day
+     */
+    public function getPopularPosts() {
+        return response()->json($this->postRepo->getPopularPostsInDay(), 200);
+    }
+
+    /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\JsonResponse

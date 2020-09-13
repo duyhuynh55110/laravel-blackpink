@@ -18,4 +18,13 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
+/**
+ * Posts
+ */
+Route::group([
+    'prefix' => 'posts',
+    'as' => 'posts'
+], function () {
+    Route::get('/get-popular-posts', 'PostController@getPopularPosts')->name(".popular-posts");
+});
 Route::apiResource("posts", "PostController");

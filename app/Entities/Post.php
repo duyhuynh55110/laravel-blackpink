@@ -2,6 +2,7 @@
 
 namespace App\Entities;
 
+use DateTimeInterface;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Prettus\Repository\Contracts\Transformable;
@@ -24,4 +25,15 @@ class Post extends Model implements Transformable
      */
     protected $fillable = [];
     public $timestamps = true;
+
+    /**
+     * Format return JSON date
+     *
+     * @param DateTimeInterface $date
+     * @return string
+     */
+    protected function serializeDate(DateTimeInterface $date)
+    {
+        return $date->format('Y-m-d H:i:s');
+    }
 }
