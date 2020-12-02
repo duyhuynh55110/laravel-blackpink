@@ -18,7 +18,7 @@ class CreatePostsTable extends Migration
             $table->integer("author_id");
             $table->string("title");
             $table->string("slug");
-            $table->string("image");
+            $table->string("img");
             $table->text("content");
             $table->integer("view_count")->default(0);
             $table->tinyInteger("comment_enable")->default(1);

@@ -25,6 +25,7 @@ Route::group([
     'prefix' => 'posts',
     'as' => 'posts'
 ], function () {
+    Route::get('/get-related-posts', 'PostController@getPopularPosts')->name(".popular-posts");
     Route::get('/get-popular-posts', 'PostController@getPopularPosts')->name(".popular-posts");
 });
 Route::apiResource("posts", "PostController");
