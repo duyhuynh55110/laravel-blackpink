@@ -36,4 +36,11 @@ class Post extends Model implements Transformable
     {
         return $date->format('Y-m-d H:i:s');
     }
+
+    /**
+     * Get post comments
+     */
+    public function comments() {
+        return $this->hasMany(ENTITIES_PATH.'Comment', 'commentable_id', 'id')->where("reply_id", null)->orderBy("id", "desc");
+    }
 }

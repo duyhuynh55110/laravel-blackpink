@@ -19,6 +19,19 @@ class PostController extends BaseController
     }
 
     /**
+     * Display a listing related posts
+     * 
+     * @param $id
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function getRelatedPosts($id) {
+        return response()->json([
+            "success" => API_SUCCESS["success"],
+            "data" => $this->postRepo->getRelatedPosts($id)
+        ], 200);
+    }
+
+    /**
      * Display a listing popular posts in day
      */
     public function getPopularPosts() {
@@ -43,7 +56,6 @@ class PostController extends BaseController
      */
     public function store(Request $request)
     {
-        //
     }
 
     /**

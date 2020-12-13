@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreatePostsCommentsTable extends Migration
+class CreateCommentsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,10 @@ class CreatePostsCommentsTable extends Migration
      */
     public function up()
     {
-        Schema::create('posts_comments', function (Blueprint $table) {
+        Schema::create('comments', function (Blueprint $table) {
             $table->id();
-            $table->integer("post_id");
+            $table->integer("commentable_id"); // morph
+            $table->integer("reply_id")->nullable()->default(null);
             $table->string("title");
             $table->text("content");
             $table->timestamps();

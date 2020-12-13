@@ -19,6 +19,17 @@ use App\Validators\PostValidator;
 class PostRepositoryEloquent extends BaseRepository implements PostRepository
 {
     /**
+     * Get related posts with this post
+     *
+     * @param $post_id
+     * @param int $limit
+     * @return mixed
+     */
+    public function getRelatedPosts($post_id, $limit = 4) {
+        return $this->limit($limit)->get();
+    }
+
+    /**
      * Get popular posts in day
      *
      * @param int $limit
