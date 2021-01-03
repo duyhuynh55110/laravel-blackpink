@@ -10,7 +10,7 @@ class CommentController extends BaseController
 
     /**
      * PostController constructor.
-     * 
+     *
      * @param CommentRepositoryEloquent $commentRepo
      */
     public function __construct(CommentRepositoryEloquent $commentRepo) {
@@ -20,23 +20,29 @@ class CommentController extends BaseController
 
     /**
      * Store a newly created resource in storage.
+     *
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     * @throws \Prettus\Validator\Exceptions\ValidatorException
      */
     public function store(Request $request) {
-        $this->commentRepo->create([
+        $comment = $this->commentRepo->create([
             "commentable_id" => $request->commentable_id,
-            "reply_id" => ($request->has('reply_id'))? $request->reply_id: null,
+            "reply_id" => ($request->has('reply_id') && $request->reply_id)? $request->reply_id: null,
             "title" => $request->title,
-            "content" => $request->content,
+            "content" => $request->input("content"),
         ]);
 
         return response()->json([
             "success" => true,
-            "messasge" => "Add newly comment successfully"
+            "data" => $comment,
         ]);
     }
 
     /**
      * Get comments belong to this posts
+     * @param $post_id
+     * @return \Illuminate\Http\JsonResponse
      */
     public function getPostCommentsById($post_id) {
         return response()->json($this->commentRepo->getPostCommentsById($post_id), 200);

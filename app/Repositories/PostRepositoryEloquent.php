@@ -38,10 +38,6 @@ class PostRepositoryEloquent extends BaseRepository implements PostRepository
      */
     public function getPopularPostsInDay($limit = 6, $direction = "DESC") {
         return $this->orderBy("view_count", $direction)
-                    ->whereBetween("created_at", [
-                        Carbon::now()->format("Y-m-d")."00:00:00",
-                        Carbon::now()
-                    ])
                     ->limit($limit)
                     ->get();
     }

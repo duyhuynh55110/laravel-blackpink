@@ -14,8 +14,10 @@ class CreatePostsCategoriesTable extends Migration
     public function up()
     {
         Schema::create('posts_categories', function (Blueprint $table) {
-            $table->integer("post_id");
-            $table->integer("category_id");
+            $table->uuid("post_id");
+            $table->uuid("category_id");
+
+            $table->primary(["post_id", "category_id"]);
         });
     }
 

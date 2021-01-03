@@ -14,7 +14,7 @@ class CreateTagsTable extends Migration
     public function up()
     {
         Schema::create('tags', function (Blueprint $table) {
-            $table->id();
+            $table->uuid('id');
             $table->string("title", 199);
             $table->text("content");
             $table->timestamp("created_at")->useCurrent();

@@ -3,7 +3,7 @@
 namespace App\Entities;
 
 use DateTimeInterface;
-use Illuminate\Database\Eloquent\Model;
+use GoldSpecDigital\LaravelEloquentUUID\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Prettus\Repository\Contracts\Transformable;
 use Prettus\Repository\Traits\TransformableTrait;
@@ -24,6 +24,7 @@ class Post extends Model implements Transformable
      * @var array
      */
     protected $fillable = [];
+    protected $guarded = [];
     public $timestamps = true;
 
     /**

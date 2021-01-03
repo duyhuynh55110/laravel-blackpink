@@ -2,6 +2,7 @@
 
 namespace App\Repositories;
 
+use Illuminate\Support\Facades\DB;
 use Prettus\Repository\Eloquent\BaseRepository;
 use Prettus\Repository\Criteria\RequestCriteria;
 use App\Repositories\CommentRepository;
@@ -48,6 +49,8 @@ class CommentRepositoryEloquent extends BaseRepository implements CommentReposit
      * Get comments by post_id (foreign key commentable_id)
      *
      * @param $post_id
+     * @param int $length
+     * @return mixed
      */
     public function getPostCommentsById($post_id, $length = 5) {
         return $this->select([
@@ -56,11 +59,14 @@ class CommentRepositoryEloquent extends BaseRepository implements CommentReposit
             "reply_id",
             "title",
             "content",
-            "created_at"
+            "created_at",
         ])
         ->with("replyComments")
-        ->where("commentable_id", $post_id)
-        ->orderBy("id", "desc")
+        ->where([
+            "commentable_id" => $post_id,
+            "reply_id" => null,
+        ])
+        ->orderBy("created_at", "desc")
         ->paginate($length);
     }
 }
