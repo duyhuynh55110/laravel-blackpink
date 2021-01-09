@@ -40,11 +40,12 @@ class CommentController extends BaseController
     }
 
     /**
-     * Get comments belong to this posts
-     * @param $post_id
+     * Get comments by commentable_id
+     *
+     * @param $commentable_id
      * @return \Illuminate\Http\JsonResponse
      */
-    public function getPostCommentsById($post_id) {
-        return response()->json($this->commentRepo->getPostCommentsById($post_id), 200);
+    public function getCommentsById($commentable_id) {
+        return response()->json($this->commentRepo->getCommentsById($commentable_id), 200);
     }
 }

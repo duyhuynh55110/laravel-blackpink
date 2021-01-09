@@ -25,8 +25,7 @@ Route::group([
 ], function () {
     // Store
     Route::post('/', 'CommentController@store');
-
-    Route::get('get-post-comments/{id}', "CommentController@getPostCommentsById")->name(".get-post-comments");
+    Route::get('get-comments/{id}', "CommentController@getCommentsById")->name(".get-comments");
 });
 
 /** Posts **/
