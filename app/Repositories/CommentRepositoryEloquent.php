@@ -45,8 +45,20 @@ class CommentRepositoryEloquent extends BaseRepository implements CommentReposit
         $this->pushCriteria(app(RequestCriteria::class));
     }
 
-    public function getCommentsRepliesByReplyId($reply_id, $length = LENGTH_PAGINATE) {
-
+    public function getCommentsReplyByReplyId($reply_id, $length = LENGTH_PAGINATE) {
+        return $this->select([
+            "id",
+            "commentable_id",
+            "reply_id", 
+            "title", 
+            "content",
+            "created_at",
+        ])
+        ->where([
+            "reply_id" => $reply_id,
+        ])
+        ->orderBy("created_at", "desc")
+        ->paginate($length);
     }
 
     /**
@@ -64,8 +76,12 @@ class CommentRepositoryEloquent extends BaseRepository implements CommentReposit
             "title",
             "content",
             "created_at",
+            DB::raw("(
+                SELECT COUNT(reply_id) 
+                FROM comments c2 
+                WHERE c2.reply_id = comments.id
+            ) as replies_count"),
         ])
-        ->with("replyComments")
         ->where([
             "commentable_id" => $commentable_id,
             "reply_id" => null,

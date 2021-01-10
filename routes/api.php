@@ -23,8 +23,8 @@ Route::group([
     'prefix' => 'comments',
     'as' => 'comments'
 ], function () {
-    // Store
-    Route::post('/', 'CommentController@store');
+    Route::get('/get-comments-reply/{reply_id}', "CommentController@getCommentsReplyByReplyId")->name(".get-comments-reply");
+    Route::post('/', 'CommentController@store'); // Store
     Route::get('get-comments/{id}', "CommentController@getCommentsById")->name(".get-comments");
 });
 
