@@ -40,16 +40,10 @@ class CommentController extends BaseController
     }
 
     /**
-     * Get comments reply 
-     */
-    public function getCommentsReplyByReplyId($reply_id) {
-        return response()->json($this->commentRepo->getCommentsReplyByReplyId($reply_id), 200);
-    }
-
-    /**
      * Get comments by commentable_id
      *
      * @param $commentable_id
+     * @param Request $request
      * @return \Illuminate\Http\JsonResponse
      */
     public function getCommentsById($commentable_id) {
