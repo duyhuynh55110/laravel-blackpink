@@ -1,4 +1,8 @@
 <?php
+define("EMOTIONS_TYPES", [
+    "comment" => 1,
+]);
+
 define("LENGTH_PAGINATE", 5);
 
 define("ENTITIES_PATH", "App\Entities\\");

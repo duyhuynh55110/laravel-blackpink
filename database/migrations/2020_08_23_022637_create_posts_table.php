@@ -23,8 +23,7 @@ class CreatePostsTable extends Migration
             $table->integer("view_count")->default(0);
             $table->tinyInteger("comment_enable")->default(1);
             $table->timestamp("published_at")->nullable();
-            $table->timestamp("created_at")->useCurrent();
-            $table->timestamp("updated_at")->useCurrent();
+            $table->timestamps();
             $table->softDeletes();
         });
     }

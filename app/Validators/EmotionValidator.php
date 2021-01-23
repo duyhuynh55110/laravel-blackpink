@@ -6,11 +6,11 @@ use \Prettus\Validator\Contracts\ValidatorInterface;
 use \Prettus\Validator\LaravelValidator;
 
 /**
- * Class PostCommentValidator.
+ * Class EmotionValidator.
  *
  * @package namespace App\Validators;
  */
-class PostCommentValidator extends LaravelValidator
+class EmotionValidator extends LaravelValidator
 {
     /**
      * Validation Rules

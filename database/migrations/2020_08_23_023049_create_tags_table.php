@@ -17,8 +17,7 @@ class CreateTagsTable extends Migration
             $table->uuid('id');
             $table->string("title", 199);
             $table->text("content");
-            $table->timestamp("created_at")->useCurrent();
-            $table->timestamp("updated_at")->useCurrent();
+            $table->timestamps();
             $table->softDeletes();
         });
     }

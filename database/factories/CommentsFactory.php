@@ -10,7 +10,6 @@ Schema::disableForeignKeyConstraints();
 Schema::enableForeignKeyConstraints();
 
 $post_id = \App\Entities\Post::first()->id;
-
 $factory->define(\App\Entities\Comment::class, function (Faker $faker) use ($post_id) {
     return [
         "commentable_id" => ($post_id)? $post_id: $faker->uuid,
