@@ -4,16 +4,16 @@ namespace App\Repositories;
 
 use Prettus\Repository\Eloquent\BaseRepository;
 use Prettus\Repository\Criteria\RequestCriteria;
-use App\Repositories\EmotionRepository;
-use App\Entities\Emotion;
-use App\Validators\EmotionValidator;
+use App\Repositories\LikeRepository;
+use App\Entities\Like;
+use App\Validators\LikeValidator;
 
 /**
- * Class EmotionRepositoryEloquent.
+ * Class LikeRepositoryEloquent.
  *
  * @package namespace App\Repositories;
  */
-class EmotionRepositoryEloquent extends BaseRepository implements EmotionRepository
+class LikeRepositoryEloquent extends BaseRepository implements LikeRepository
 {
     /**
      * Specify Model class name
@@ -22,20 +22,10 @@ class EmotionRepositoryEloquent extends BaseRepository implements EmotionReposit
      */
     public function model()
     {
-        return Emotion::class;
+        return Like::class;
     }
 
-    /**
-    * Specify Validator class name
-    *
-    * @return mixed
-    */
-    public function validator()
-    {
-
-        return EmotionValidator::class;
-    }
-
+    
 
     /**
      * Boot up the repository, pushing criteria

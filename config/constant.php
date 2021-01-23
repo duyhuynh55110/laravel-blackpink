@@ -1,6 +1,9 @@
 <?php
-define("EMOTIONS_TYPES", [
-    "comment" => 1,
+define("LIKES_LIKEABLE_TYPES", [
+    "comments" => 1,
+]);
+define("LIKES_TYPES", [
+    "like" => 1,
 ]);
 
 define("LENGTH_PAGINATE", 5);

@@ -2,7 +2,7 @@
 
 use Illuminate\Database\Seeder;
 
-class EmotionsSeeder extends Seeder
+class CommentSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -11,6 +11,6 @@ class EmotionsSeeder extends Seeder
      */
     public function run()
     {
-        factory(\App\Entities\Emotion::class, 100)->create();
+        factory(\App\Entities\Comment::class, 100)->create();
     }
 }

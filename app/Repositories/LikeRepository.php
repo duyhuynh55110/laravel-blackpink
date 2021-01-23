@@ -5,11 +5,11 @@ namespace App\Repositories;
 use Prettus\Repository\Contracts\RepositoryInterface;
 
 /**
- * Interface EmotionRepository.
+ * Interface LikeRepository.
  *
  * @package namespace App\Repositories;
  */
-interface EmotionRepository extends RepositoryInterface
+interface LikeRepository extends RepositoryInterface
 {
     //
 }

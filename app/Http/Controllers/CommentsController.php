@@ -4,12 +4,12 @@ namespace App\Http\Controllers;
 
 use App\Repositories\CommentRepositoryEloquent;
 use Illuminate\Http\Request;
-class CommentController extends BaseController
+class CommentsController extends BaseController
 {
     private $commentRepo;
 
     /**
-     * PostController constructor.
+     * PostsController constructor.
      *
      * @param CommentRepositoryEloquent $commentRepo
      */

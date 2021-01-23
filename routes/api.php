@@ -23,8 +23,8 @@ Route::group([
     'prefix' => 'comments',
     'as' => 'comments'
 ], function () {
-    Route::post('/', 'CommentController@store'); // Store
-    Route::get('get-comments/{id}', "CommentController@getCommentsById")->name(".get-comments");
+    Route::post('/', 'CommentsController@store'); // Store
+    Route::get('get-comments/{id}', "CommentsController@getCommentsById")->name(".get-comments");
 });
 
 /** Posts **/
@@ -32,7 +32,7 @@ Route::group([
     'prefix' => 'posts',
     'as' => 'posts'
 ], function () {
-    Route::get('get-related-posts/{id}', 'PostController@getRelatedPosts')->name(".popular-posts");
-    Route::get('get-popular-posts', 'PostController@getPopularPosts')->name(".popular-posts");
+    Route::get('get-related-posts/{id}', 'PostsController@getRelatedPosts')->name(".popular-posts");
+    Route::get('get-popular-posts', 'PostsController@getPopularPosts')->name(".popular-posts");
 });
-Route::apiResource("posts", "PostController");
+Route::apiResource("posts", "PostsController");

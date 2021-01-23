@@ -7,11 +7,11 @@ use Prettus\Repository\Contracts\Transformable;
 use Prettus\Repository\Traits\TransformableTrait;
 
 /**
- * Class Emotion.
+ * Class Like.
  *
  * @package namespace App\Entities;
  */
-class Emotion extends Model implements Transformable
+class Like extends Model implements Transformable
 {
     use TransformableTrait;
 
@@ -21,5 +21,5 @@ class Emotion extends Model implements Transformable
      * @var array
      */
     protected $fillable = [];
-    public $timestamps = true;
+
 }

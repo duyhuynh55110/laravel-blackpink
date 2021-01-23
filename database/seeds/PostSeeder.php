@@ -2,7 +2,7 @@
 
 use Illuminate\Database\Seeder;
 use \Illuminate\Support\Facades\Schema;
-class PostsSeeder extends Seeder
+class PostSeeder extends Seeder
 {
     /**
      * Run the database seeds.

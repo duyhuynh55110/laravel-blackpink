@@ -5,12 +5,12 @@ namespace App\Http\Controllers;
 use App\Repositories\PostRepositoryEloquent;
 use Illuminate\Http\Request;
 
-class PostController extends BaseController
+class PostsController extends BaseController
 {
     private $postRepo;
 
     /**
-     * PostController constructor.
+     * PostsController constructor.
      * @param PostRepositoryEloquent $postRepo
      */
     public function __construct(PostRepositoryEloquent $postRepo) {
@@ -20,7 +20,7 @@ class PostController extends BaseController
 
     /**
      * Display a listing related posts
-     * 
+     *
      * @param $id
      * @return \Illuminate\Http\JsonResponse
      */

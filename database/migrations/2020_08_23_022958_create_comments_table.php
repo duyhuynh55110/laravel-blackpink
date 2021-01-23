@@ -16,6 +16,7 @@ class CreateCommentsTable extends Migration
         Schema::create('comments', function (Blueprint $table) {
             $table->uuid('id')->primary();
             $table->uuid("commentable_id"); // morph
+            $table->uuid("commentable_type")->nullable(); // morph
             $table->uuid("reply_id")->nullable()->default(null);
             $table->string("title");
             $table->text("content");
