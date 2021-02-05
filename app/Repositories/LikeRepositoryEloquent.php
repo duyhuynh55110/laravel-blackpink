@@ -25,8 +25,6 @@ class LikeRepositoryEloquent extends BaseRepository implements LikeRepository
         return Like::class;
     }
 
-    
-
     /**
      * Boot up the repository, pushing criteria
      */
@@ -34,5 +32,5 @@ class LikeRepositoryEloquent extends BaseRepository implements LikeRepository
     {
         $this->pushCriteria(app(RequestCriteria::class));
     }
-    
+
 }

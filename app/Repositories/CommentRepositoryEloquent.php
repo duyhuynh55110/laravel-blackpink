@@ -27,10 +27,10 @@ class CommentRepositoryEloquent extends BaseRepository implements CommentReposit
     }
 
     /**
-    * Specify Validator class name
-    *
-    * @return mixed
-    */
+     * Specify Validator class name
+     *
+     * @return mixed
+     */
     public function validator()
     {
 
@@ -55,29 +55,33 @@ class CommentRepositoryEloquent extends BaseRepository implements CommentReposit
      */
     public function getCommentsById($commentable_id, $length = LENGTH_PAGINATE) {
         return $this->select([
-            "id",
+            "comments.id",
             "commentable_id",
             "reply_id",
             "title",
             "content",
-            "created_at",
+            "comments.created_at",
             DB::raw("(
                 SELECT COUNT(reply_id)
                 FROM comments c2
                 WHERE c2.reply_id = comments.id
             ) as replies_count"),
+            DB::raw("COUNT(likes.likeable_id) as likes_count"),
+            DB::raw("GROUP_CONCAT(DISTINCT(likes.type) ORDER BY likes.type DESC) as likes_type"),
         ])
-        ->where([
-            "commentable_id" => $commentable_id,
-        ])
-        ->where(function ($q) {
-            if(\request()->has('reply_id')) {
-                return $q->where('reply_id', \request()->get('reply_id'));
-            } else {
-                return $q->whereNull('reply_id');
-            }
-        })
-        ->orderBy("created_at", "desc")
-        ->paginate($length);
+            ->leftJoin("likes", "likes.likeable_id", "=", "comments.id")
+            ->where([
+                "commentable_id" => $commentable_id,
+            ])
+            ->where(function ($q) {
+                if(\request()->has('reply_id')) {
+                    return $q->where('reply_id', \request()->get('reply_id'));
+                } else {
+                    return $q->whereNull('reply_id');
+                }
+            })
+            ->groupBy('comments.id')
+            ->orderBy("created_at", "desc")
+            ->paginate($length);
     }
 }

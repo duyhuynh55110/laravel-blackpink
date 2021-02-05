@@ -13,7 +13,7 @@ class LikeCreateRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +24,9 @@ class LikeCreateRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            "likeable_id" => "required",
+            "likeable_type" => "required",
+            //"type" => "required",
         ];
     }
 }

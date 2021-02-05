@@ -46,7 +46,7 @@ class CommentsController extends BaseController
      * @param Request $request
      * @return \Illuminate\Http\JsonResponse
      */
-    public function getCommentsById($commentable_id) {
+    public function index($commentable_id) {
         return response()->json($this->commentRepo->getCommentsById($commentable_id), 200);
     }
 }

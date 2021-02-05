@@ -18,13 +18,21 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
+/** Likes */
+Route::group([
+    'prefix' => 'likes',
+    'as' => 'likes'
+], function () {
+    Route::post('/', 'LikesController@store'); // Store
+});
+
 /** Comments **/
 Route::group([
     'prefix' => 'comments',
     'as' => 'comments'
 ], function () {
     Route::post('/', 'CommentsController@store'); // Store
-    Route::get('get-comments/{id}', "CommentsController@getCommentsById")->name(".get-comments");
+    Route::get('/{id}', "CommentsController@index");
 });
 
 /** Posts **/
