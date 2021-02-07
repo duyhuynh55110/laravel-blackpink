@@ -33,9 +33,9 @@ class LikesController extends BaseController
             "type" => $request->has("type") && array_key_exists($request->type, LIKES_TYPES)? LIKES_TYPES[$request->type]: LIKES_TYPES["like"],
         ]);
 
-        return response()->json([
+        return jsonResponse([
             "success" => API_SUCCESS["success"],
             "data" => $like,
-        ], 200);
+        ]);
     }
 }

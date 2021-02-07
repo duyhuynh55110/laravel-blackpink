@@ -33,10 +33,7 @@ class CommentsController extends BaseController
             "content" => $request->input("content"),
         ]);
 
-        return response()->json([
-            "success" => true,
-            "data" => $comment,
-        ]);
+        return jsonResponse($comment);
     }
 
     /**
@@ -47,6 +44,6 @@ class CommentsController extends BaseController
      * @return \Illuminate\Http\JsonResponse
      */
     public function index($commentable_id) {
-        return response()->json($this->commentRepo->getCommentsById($commentable_id), 200);
+        return jsonResponse($this->commentRepo->getCommentsById($commentable_id));
     }
 }

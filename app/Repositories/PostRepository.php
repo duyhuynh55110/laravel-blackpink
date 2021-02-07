@@ -17,5 +17,5 @@ interface PostRepository extends RepositoryInterface
      * @param int $length
      * @return mixed
      */
-    public function getPostsPaginate($length = 10);
+    public function getPosts($length = 10);
 }

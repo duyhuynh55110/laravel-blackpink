@@ -2,6 +2,7 @@
 
 namespace App\Repositories;
 
+use App\Repositories\Traits\RequestTrait;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Prettus\Repository\Eloquent\BaseRepository;
@@ -16,6 +17,8 @@ use App\Validators\CommentValidator;
  */
 class CommentRepositoryEloquent extends BaseRepository implements CommentRepository
 {
+    use RequestTrait;
+
     /**
      * Specify Model class name
      *
@@ -53,8 +56,8 @@ class CommentRepositoryEloquent extends BaseRepository implements CommentReposit
      * @param int $length
      * @return mixed
      */
-    public function getCommentsById($commentable_id, $length = LENGTH_PAGINATE) {
-        return $this->select([
+    public function getCommentsById($commentable_id) {
+        $query = $this->select([
             "comments.id",
             "commentable_id",
             "reply_id",
@@ -80,8 +83,11 @@ class CommentRepositoryEloquent extends BaseRepository implements CommentReposit
                     return $q->whereNull('reply_id');
                 }
             })
-            ->groupBy('comments.id')
-            ->orderBy("created_at", "desc")
-            ->paginate($length);
+            ->groupBy('comments.id');
+
+        // Sort
+        $this->requestSort($query, ['created_at', 'desc']);
+
+        return $query->paginate($this->requestLimit(PER_PAGE_5));
     }
 }

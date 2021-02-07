@@ -20,7 +20,7 @@ class CreatePostsTable extends Migration
             $table->string("slug");
             $table->string("img");
             $table->text("content");
-            $table->integer("view_count")->default(0);
+            $table->integer("views_count")->default(0);
             $table->tinyInteger("comment_enable")->default(1);
             $table->timestamp("published_at")->nullable();
             $table->timestamps();

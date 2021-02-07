@@ -15,7 +15,9 @@ define("POLYMORPHISM_TYPES", [
     "comment" => get_class(new \App\Entities\Comment()),
 ]);
 
-define("LENGTH_PAGINATE", 5);
+define("PER_PAGE_10", 10);
+define("PER_PAGE_5", 5);
+
 define("ENTITIES_PATH", "App\Entities\\");
 define("API_SUCCESS", [
     "success" => true,

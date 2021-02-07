@@ -24,18 +24,8 @@ class PostsController extends BaseController
      * @param $id
      * @return \Illuminate\Http\JsonResponse
      */
-    public function getRelatedPosts($id) {
-        return response()->json([
-            "success" => API_SUCCESS["success"],
-            "data" => $this->postRepo->getRelatedPosts($id)
-        ], 200);
-    }
-
-    /**
-     * Display a listing popular posts in day
-     */
-    public function getPopularPosts() {
-        return response()->json($this->postRepo->getPopularPostsInDay(), 200);
+    public function relatedPosts($id) {
+        return jsonResponse($this->postRepo->getRelatedPosts($id));
     }
 
     /**
@@ -45,17 +35,7 @@ class PostsController extends BaseController
      */
     public function index()
     {
-        return response()->json($this->postRepo->getPostsPaginate(), 200);
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
+        return jsonResponse($this->postRepo->getPosts());
     }
 
     /**
@@ -66,8 +46,17 @@ class PostsController extends BaseController
      */
     public function show($id)
     {
-        $data = $this->postRepo->find($id);
-        return response()->json($data);
+        return jsonResponse($this->postRepo->find($id));
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function store(Request $request)
+    {
     }
 
     /**

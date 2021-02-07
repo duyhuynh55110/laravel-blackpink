@@ -40,7 +40,6 @@ Route::group([
     'prefix' => 'posts',
     'as' => 'posts'
 ], function () {
-    Route::get('get-related-posts/{id}', 'PostsController@getRelatedPosts')->name(".popular-posts");
-    Route::get('get-popular-posts', 'PostsController@getPopularPosts')->name(".popular-posts");
+    Route::get('related-posts/{id}', 'PostsController@relatedPosts');
 });
 Route::apiResource("posts", "PostsController");

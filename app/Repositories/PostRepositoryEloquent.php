@@ -2,12 +2,10 @@
 
 namespace App\Repositories;
 
-use Carbon\Carbon;
-use Illuminate\Container\Container as Application;
+use App\Repositories\Traits\RequestTrait;
 use Illuminate\Support\Facades\DB;
 use Prettus\Repository\Eloquent\BaseRepository;
 use Prettus\Repository\Criteria\RequestCriteria;
-use App\Repositories\PostRepository;
 use App\Entities\Post;
 use App\Validators\PostValidator;
 
@@ -18,6 +16,8 @@ use App\Validators\PostValidator;
  */
 class PostRepositoryEloquent extends BaseRepository implements PostRepository
 {
+    use RequestTrait;
+
     /**
      * Get related posts with this post
      *
@@ -25,21 +25,8 @@ class PostRepositoryEloquent extends BaseRepository implements PostRepository
      * @param int $limit
      * @return mixed
      */
-    public function getRelatedPosts($post_id, $limit = 4) {
-        return $this->limit($limit)->get();
-    }
-
-    /**
-     * Get popular posts in day
-     *
-     * @param int $limit
-     * @param string $direction
-     * @return mixed
-     */
-    public function getPopularPostsInDay($limit = 6, $direction = "DESC") {
-        return $this->orderBy("view_count", $direction)
-                    ->limit($limit)
-                    ->get();
+    public function getRelatedPosts($post_id) {
+        return $this->limit($this->requestLimit(4))->get();
     }
 
     /**
@@ -49,9 +36,20 @@ class PostRepositoryEloquent extends BaseRepository implements PostRepository
      * @param string[] $columns
      * @return mixed
      */
-    public function getPostsPaginate($length = 10, $columns = ['*'])
+    public function getPosts($columns = ['*'])
     {
-        return $this->orderBy("id", "desc")->paginate($length);
+        $query = $this->select([
+            "*",
+            DB::raw("(SELECT COUNT(comments.id)
+                    FROM comments
+                    WHERE comments.commentable_id = posts.id
+                ) as comments_count"),
+            ]);
+
+        // Sort
+        $this->requestSort($query);
+
+        return $query->paginate($this->requestLimit());
     }
 
     /**
@@ -65,10 +63,10 @@ class PostRepositoryEloquent extends BaseRepository implements PostRepository
     }
 
     /**
-    * Specify Validator class name
-    *
-    * @return mixed
-    */
+     * Specify Validator class name
+     *
+     * @return mixed
+     */
     public function validator()
     {
 
