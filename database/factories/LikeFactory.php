@@ -9,7 +9,7 @@ $factory->define(\App\Entities\Like::class, function (Faker $faker) {
     return [
         "user_id" => $faker->uuid,
         "likeable_id" => \App\Entities\Comment::first()->id,
-        "likeable_type" => LIKES_LIKEABLE_TYPES["comments"],
+        "likeable_type" => POLYMORPHISM_TYPES["comment"],
         "type" => LIKES_TYPES["like"],
     ];
 });

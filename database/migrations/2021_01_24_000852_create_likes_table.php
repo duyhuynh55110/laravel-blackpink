@@ -20,7 +20,7 @@ class CreateLikesTable extends Migration
             $table->uuid("user_id");
             $table->uuid("likeable_id");
             $table->string("likeable_type", 20);
-            $table->tinyInteger("type");
+            $table->string("type", 20);
             $table->timestamps();
 		});
 	}

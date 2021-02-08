@@ -26,7 +26,7 @@ class PostRepositoryEloquent extends BaseRepository implements PostRepository
      * @return mixed
      */
     public function getRelatedPosts($post_id) {
-        return $this->limit($this->requestLimit(4))->get();
+        return $this->limit($this->_limit(4))->get();
     }
 
     /**
@@ -47,9 +47,9 @@ class PostRepositoryEloquent extends BaseRepository implements PostRepository
             ]);
 
         // Sort
-        $this->requestSort($query);
+        $this->_sort($query);
 
-        return $query->paginate($this->requestLimit());
+        return $query->paginate($this->_limit());
     }
 
     /**

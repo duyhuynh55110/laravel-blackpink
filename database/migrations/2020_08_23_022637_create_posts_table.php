@@ -17,7 +17,6 @@ class CreatePostsTable extends Migration
             $table->uuid('id')->primary();
             $table->uuid("author_id");
             $table->string("title");
-            $table->string("slug");
             $table->string("img");
             $table->text("content");
             $table->integer("views_count")->default(0);

@@ -12,11 +12,6 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
-Route::get('/', function () {
-    return view('welcome');
-});
-
 Route::get('/post/{id}', function ($id) {
     $posts = \App\Entities\Post::create([
             'author_id' => 1,

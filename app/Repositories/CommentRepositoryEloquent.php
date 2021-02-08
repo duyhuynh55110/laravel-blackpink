@@ -86,8 +86,8 @@ class CommentRepositoryEloquent extends BaseRepository implements CommentReposit
             ->groupBy('comments.id');
 
         // Sort
-        $this->requestSort($query, ['created_at', 'desc']);
+        $this->_sort($query, ['created_at', 'desc']);
 
-        return $query->paginate($this->requestLimit(PER_PAGE_5));
+        return $query->paginate($this->_limit(PER_PAGE_5));
     }
 }
